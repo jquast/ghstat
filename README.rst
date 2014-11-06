@@ -35,7 +35,9 @@ The stable version of this package is maintained on pypi, install using pip::
     pip install ghstat
 
 Generate a personal access token, https://github.com/settings/applications,
-enabling scope *repo:status* and *public_repo*.  Use this token for the `--token` parameter.
+enabling scope *repo:status* and *public_repo* or *private_repo*, respectively.
+
+Use this token for the `--token` parameter.
 
 Examples
 --------
