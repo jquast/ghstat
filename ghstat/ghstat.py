@@ -10,7 +10,7 @@ Usage:
                    (-r <repo>  | --repo=<repo>)
                    (-c <sha>   | --commit=<sha>)
                    (-s <state> | --state=<failure|success|pending>)
-                   (-d <desc>  | --description=<desc>)
+                   [(-d <desc>  | --description=<desc>)]
                    [(-l <url>  | --target-url=<url>)]
                    [(-b <url>  | --base-url=<url>)]
   gh-status.py get (-t <token> | --token=<token>)
@@ -81,7 +81,7 @@ def main(args):
     if args['set']:
         data = json.dumps({
             'state': args['state'],
-            'description': args['description'],
+            'description': args['description'] or '',
             'target_url': args['target_url'] or ''})
         resp = requests.post(url=url, data=data, headers=headers)
         assert resp.status_code == 201, (resp.status_code, resp.text)
