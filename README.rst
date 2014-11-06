@@ -44,18 +44,13 @@ failing a build on github.com::
 
     ghstat.py set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
                   --commit 72b74be0de46392a05d8f470b64272b8036e63f8 \
-                  --user jquast \
-                  --repo ghstat \
-                  --state success \
-                  --description 'Everything A-OK' \
-                  --target-url
+                  --user jquast --repo ghstat --state success
 
 retrieving the status of a commit::
 
    ghstat.py get --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
                  --commit 72b74be0de46392a05d8f470b64272b8036e63f8 \
-                 --user jquast \
-                 --repo ghstat
+                 --user jquast --repo ghstat
 
 linking to a private bamboo and github enterprise account::
 
