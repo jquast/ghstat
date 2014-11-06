@@ -73,7 +73,7 @@ githubdate_: Same thing, only it uses an .ini file instead of cmd-line parameter
 Changes
 -------
 
-0.1.0
+0.1.1
   * Initial release to pypi
 
 .. _githubdate: https://github.com/brunobord/githubdate/

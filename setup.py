@@ -11,7 +11,7 @@ def main():
     import codecs
     setuptools.setup(
         name='ghstat',
-        version='0.1.0',
+        version='0.1.1',
         description=("Command-line application to get or set "
                      "github commit status."),
         long_description=open(
