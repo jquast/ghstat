@@ -34,61 +34,49 @@ The stable version of this package is maintained on pypi, install using pip::
 
     pip install ghstat
 
+Generate a personal access token, https://github.com/settings/applications,
+enabling scope *repo:status* and *public_repo*.  Use this token for the `--token` parameter.
+
 Examples
 --------
 
-linking to a private bamboo and github enterprise account::
-    ghstdt set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
-               --commit 0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a \
-               --user jquast \
-               --repo ghstat \
-               --state success \
-               --description 'build successful' \
-               --target-url 'https://bamboo.mycorp.com/browse/PROJ-BUILD10-1' \
-               --base-url 'https://github.mycorp.com/api/v3/'
+failing a build on github.com::
 
-failing a free account build on github::
-    ghstat set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
-               --commit 0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a \
-               --user jquast \
-               --repo ghstat \
-               --state failure \
-               --description '10 Unit Tests failed'
+    ghstat.py set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
+                  --commit 72b74be0de46392a05d8f470b64272b8036e63f8 \
+                  --user jquast \
+                  --repo ghstat \
+                  --state success \
+                  --description 'Everything A-OK' \
+                  --target-url
 
 retrieving the status of a commit::
 
-   XXX
+   ghstat.py get --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
+                 --commit 72b74be0de46392a05d8f470b64272b8036e63f8 \
+                 --user jquast \
+                 --repo ghstat
 
+linking to a private bamboo and github enterprise account::
 
-License
--------
+    ghstat.py set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
+                  --commit 0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a \
+                  --user jquast \
+                  --repo ghstat \
+                  --state success \
+                  --description 'build successful' \
+                  --target-url 'https://bamboo.mycorp.com/browse/PROJ-BUILD10-1' \
+                  --base-url 'https://github.mycorp.com/api/v3/'
 
-::
+Others
+------
 
-    The MIT License (MIT)
-
-    Copyright (c) 2014 <contact@jeffquast.com>
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
+githubdate_: Same thing, only it uses an .ini file instead of cmd-line parameters.
 
 Changes
 -------
 
 0.1.0
   * Initial release to pypi
+
+.. _githubdate: https://github.com/brunobord/githubdate/
