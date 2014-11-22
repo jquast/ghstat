@@ -37,24 +37,24 @@ The stable version of this package is maintained on pypi, install using pip::
 Generate a personal access token, https://github.com/settings/applications,
 enabling scope *repo:status* and *public_repo* or *private_repo*, respectively.
 
-Use this token for the `--token` parameter.
+Use this token for the `--token` parameter, or as the environment variable ``GITHUB_APP_TOKEN``
 
 Examples
 --------
 
-failing a build on github.com::
+Failing a build on github.com::
 
     ghstat.py set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
                   --commit 72b74be0de46392a05d8f470b64272b8036e63f8 \
                   --user jquast --repo ghstat --state success
 
-retrieving the status of a commit::
+Retrieving the status of a commit as json data to stdout::
 
    ghstat.py get --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
                  --commit 72b74be0de46392a05d8f470b64272b8036e63f8 \
                  --user jquast --repo ghstat
 
-linking to a private bamboo and github enterprise account::
+Linking to a private bamboo and github enterprise account::
 
     ghstat.py set --token 0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d \
                   --commit 0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a \
@@ -72,6 +72,11 @@ githubdate_: Same thing, only it uses an .ini file instead of cmd-line parameter
 
 Changes
 -------
+
+0.2.0
+  * Support python 3
+  * Support token as environment value ``GITHUB_APP_TOKEN``
+  * Resolve IndexError when retrieving status for a commit without any.
 
 0.1.0
   * Initial release to pypi

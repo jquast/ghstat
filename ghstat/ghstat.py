@@ -1,23 +1,23 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 """
 Sets github status of commit-id by given command-line parameters.
 
 Used by CI to report into a pull request.
 
 Usage:
-  gh-status.py set (-t <token> | --token=<token>)
-                   (-u <user>  | --user=<user>)
-                   (-r <repo>  | --repo=<repo>)
-                   (-c <sha>   | --commit=<sha>)
-                   (-s <state> | --state=<failure|success|pending>)
+  gh-status.py set (-u <user>   | --user=<user>)
+                   (-r <repo>   | --repo=<repo>)
+                   (-c <sha>    | --commit=<sha>)
+                   (-s <state>  | --state=<failure|success|pending>)
+                   [(-t <token> | --token=<token>)]
                    [(-d <desc>  | --description=<desc>)]
-                   [(-l <url>  | --target-url=<url>)]
-                   [(-b <url>  | --base-url=<url>)]
-  gh-status.py get (-t <token> | --token=<token>)
-                   (-u <user>  | --user=<user>)
-                   (-r <repo>  | --repo=<repo>)
-                   (-c <sha>   | --commit=<sha>)
-                   [--base-url=<url>]
+                   [(-l <url>   | --target-url=<url>)]
+                   [(-b <url>   | --base-url=<url>)]
+  gh-status.py get (-u <user>   | --user=<user>)
+                   (-r <repo>   | --repo=<repo>)
+                   (-c <sha>    | --commit=<sha>)
+                   [(-t <token> | --token=<token>)]
+                   [(-b <url>   | --base-url=<url>)]
   gh-status.py -h | --help
 
 Options:
@@ -32,22 +32,37 @@ Options:
   -l --target-url=<url>   Build status referral url.
 """
 from __future__ import print_function
+
 # std imports
-import urlparse
+try:
+    # python2
+    from urlparse import urlparse
+except ImportError:
+    # python3
+    from urllib.parse import urlparse
 import json
+import os
 
 # 3rd-party
 from docopt import docopt
 import requests
 
+
 def validate_args(args):
+    # validate --token or GITHUB_APP_TOKEN,
+    args['--token'] = os.getenv('GITHUB_APP_TOKEN',
+                                args.get('--token'))
+    assert args['--token'], (
+        'A github application token should be supplied as either cmd-line '
+        'parameter --token or OS Environment key GITHUB_APP_TOKEN')
+
     # validate --base-url,
-    uri = urlparse.urlparse(args['--base-url'])
+    uri = urlparse(args['--base-url'])
     assert uri.scheme in ('http', 'https',), args['--base-url']
 
     # validate --target-url,
     if args['--target-url']:
-        uri = urlparse.urlparse(args['--target-url'])
+        uri = urlparse(args['--target-url'])
         assert uri.scheme in ('http', 'https',), args['--target-url']
 
     # coerce: remove trailing '/' from --base-url
@@ -62,12 +77,12 @@ def validate_args(args):
         state = args['--state']
         assert state in ('failure', 'success', 'pending'), args['--state']
 
-    # doctopt already handles --help
+    # doctopt already handles --help, remove
     del args['--help']
 
     # remove all the prefixing '--', change base-url -> base_url
     return dict((key.lstrip('-').replace('-', '_'), value)
-                 for key, value in args.items())
+                for key, value in args.items())
 
 
 def main(args):
@@ -90,7 +105,7 @@ def main(args):
         resp = requests.get(url=url, headers=headers)
         assert resp.status_code == 200, (resp.status_code, resp.text)
         # the first item of the array is the most recent.
-        first = resp.json()[0]
+        first = resp.json()[:1]
         print(json.dumps(first, indent=2))
     return 0
 
