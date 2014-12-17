@@ -73,6 +73,11 @@ githubdate_: Same thing, only it uses an .ini file instead of cmd-line parameter
 Changes
 -------
 
+0.3.0
+  * For descriptions of length greater than 140, truncate and emit a warning
+    to standard error. It will be changed to a length of 140 ending in text
+    marker `` (...)``.
+
 0.2.0
   * Support python 3
   * Support token as environment value ``GITHUB_APP_TOKEN``

@@ -42,6 +42,7 @@ except ImportError:
     from urllib.parse import urlparse
 import json
 import os
+import sys
 
 # 3rd-party
 from docopt import docopt
@@ -76,6 +77,16 @@ def validate_args(args):
     if args['set']:
         state = args['--state']
         assert state in ('failure', 'success', 'pending'), args['--state']
+
+    # validate --description,
+    if '--description' in args and len(args['--description']) > 140:
+        sys.stderr.write('warning: length of --description is length {0}, '
+                         'but maximum allowed length is 140.  '
+                         'It will be truncated.\n'
+                         .format(len(args['--description'])))
+        marker = ' (...)'
+        trimmed = slice(0, 140 - len(marker))
+        args['--description'] = args['--description'][trimmed]
 
     # doctopt already handles --help, remove
     del args['--help']
