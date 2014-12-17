@@ -1,12 +1,17 @@
 .. image:: https://img.shields.io/pypi/v/ghstat.svg
-    :alt: Latest Version
+   :target: https://pypi.python.org/pypi/ghstat
+   :alt: Latest Version
 
 .. image:: https://pypip.in/license/ghstat/badge.svg
-    :alt: License
+   :alt: License
 
 .. image:: https://img.shields.io/pypi/dm/ghstat.svg
-    :alt: Downloads
+   :target: https://pypi.python.org/pypi/ghstat
+   :alt: Downloads
 
+.. image:: https://landscape.io/github/jquast/ghstat/master/landscape.svg
+   :target: https://landscape.io/github/jquast/ghstat/master
+   :alt: Code Health
 
 ============
 Introduction
