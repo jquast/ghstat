@@ -13,10 +13,11 @@ Introduction
 ============
 
 This command-line application is mainly for continuous build and
-integration environments.  It allows one to set provide all of the
-details necessary to mark a commit, for pull requests, to read
-"All is Well" or "Merge with Caution" with an optional hyperlink
-to the CI build server, or description of build failure.
+integration environments.  It allows providing all of the details
+necessary to mark the status of a commit.  For pull requests, it
+may read "All is Well" or "Merge with Caution" with an optional
+hyperlink to the CI build server, and optional description of
+the build failure.
 
 This is done using the Github v3 API.
 
