@@ -38,6 +38,8 @@ try:
     # python2
     from urlparse import urlparse
 except ImportError:
+    # pylint: disable=E0611
+    #         No name 'parse' in module 'urlib'
     # python3
     from urllib.parse import urlparse
 import json
