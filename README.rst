@@ -79,6 +79,12 @@ githubdate_: Same thing, only it uses an .ini file instead of cmd-line parameter
 Changes
 -------
 
+0.3.1
+  * New API argument, --context="ci/teamcity" to `distinguish multiple 
+    sources <https://developer.github.com/changes/2014-03-27-combined-status-api/>`_.
+    Contributed by `@kad <https://github.com/kad>`_ in `PR 3
+    <https://github.com/jquast/ghstat/pull/3>`_
+
 0.3.0
   * For descriptions of length greater than 140, truncate and emit a warning
     to standard error. It will be changed to a length of 140 ending in text
