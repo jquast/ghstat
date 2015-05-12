@@ -11,6 +11,7 @@ Usage:
                    (-s <state>  | --state=<failure|success|pending>)
                    [(-t <token> | --token=<token>)]
                    [(-d <desc>  | --description=<desc>)]
+                   [(-x <ctx>   | --context=<ctx>)]
                    [(-l <url>   | --target-url=<url>)]
                    [(-b <url>   | --base-url=<url>)]
   gh-status.py get (-u <user>   | --user=<user>)
@@ -28,6 +29,7 @@ Options:
   -c --commit=<sha>       Git sha commit-id.
   -s --state=<state>      Build status, one of: failure, success, pending.
   -d --description=<desc> Description when setting commit status.
+  -x --context=<ctx>      Label to differentiate this status.
   -b --base-url=<url>     Api base url [default: https://api.github.com/].
   -l --target-url=<url>   Build status referral url.
 """
@@ -109,6 +111,7 @@ def main(args):
     if args['set']:
         data = json.dumps({
             'state': args['state'],
+            'context': args['context'],
             'description': args['description'] or '',
             'target_url': args['target_url'] or ''})
         resp = requests.post(url=url, data=data, headers=headers)
