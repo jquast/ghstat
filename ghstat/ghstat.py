@@ -81,7 +81,7 @@ def validate_args(args):
         assert state in ('failure', 'success', 'pending'), args['--state']
 
     # validate --description,
-    if '--description' in args and len(args['--description']) > 140:
+    if args['--description'] and len(args['--description']) > 140:
         sys.stderr.write('warning: length of --description is length {0}, '
                          'but maximum allowed length is 140.  '
                          'It will be truncated.\n'
