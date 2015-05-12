@@ -11,7 +11,7 @@ here = os.path.dirname(__file__)
 def main():
     setuptools.setup(
         name='ghstat',
-        version='0.3.0',
+        version='0.3.1',
         description=("Command-line application to get or set "
                      "github commit status."),
         long_description=open(
